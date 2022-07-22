@@ -7,7 +7,7 @@ from PIL import Image, ImageTk
 
 #creacion de la ventana
 ventana = tk.Tk()
-#ajuste parametros ventana
+#ajuste parametros ventanalaboratorio
 ventana.title("Grafos")
 ventana.geometry('640x480')
 ventana.iconbitmap("icon.ico")
