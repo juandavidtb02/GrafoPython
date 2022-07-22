@@ -11,32 +11,33 @@ ventana = tk.Tk()
 ventana.title("Grafos")
 ventana.geometry('640x480')
 ventana.iconbitmap("icon.ico")
-
+ventana.resizable(0,0)
+bg_fondo = "#606060"
+ventana.configure(background=bg_fondo)
 
 #titulo principal
-title = Label(ventana, text="LABORATORIO OPTIMIZACIÓN", font=("Courier",18))
-title.pack(side=TOP)
+title = Label(ventana, text="LABORATORIO OPTIMIZACIÓN", font=("Ubuntu",20),bg=bg_fondo,fg='white')
+title.pack(side=TOP,pady=10)
 
-canvas = Canvas(width=300,height=1,bg='black')
-canvas.pack()
-canvas.create_line(10,10,80,80)
 
 #titulo creacion del grafo
-title2 = tk.Label(ventana, text="CREACIÓN DEL GRAFO", fg="red", font=('Verdana',14))
+title2 = tk.Label(ventana, text="CREACIÓN DEL GRAFO", fg="white", font=('Ubuntu',14),bg=bg_fondo)
 title2.pack()
 
 #se declara un vector para guardar los vertices
 vertices = []
-
+frameContent = Frame(ventana,width=400,height=300,bg=bg_fondo)
+frameContent.pack(pady=60)
 #titulo primera entrada
-request = tk.Label(ventana, text="Inserte numero de vertices",font=('Arial',12))
+request = tk.Label(frameContent, text="Inserte numero de vertices",font=('Ubuntu',12),bg=bg_fondo,fg="white")
 request.pack(pady=5)
 
-fail = tk.Label(ventana, text="Ingrese un numero valido de vertices",font=('Arial',12))
+fail = tk.Label(frameContent, text="Ingrese un numero valido de vertices",font=('Arial',12),bg=bg_fondo,fg="white")
 
 
 #entradas numero de vertices
-gVertices = tk.Entry(ventana, width=5, font=('Verdana',12))
+gVertices = tk.Entry(frameContent, width=5, font=('Ubuntu',12),bg='#BFBFBF' )
+gVertices.insert(0,'1')
 gVertices.pack(ipadx=5,ipady=5)
 
 #creacion vectores necesarios para el algoritmo
@@ -101,7 +102,7 @@ def grafo():
 
         title2['text'] = "GRAFO CREADO"
         request.destroy()
-
+        frameContent.destroy()
         frameImage.pack()
         frameImage.config(padx=120)
 
@@ -140,19 +141,19 @@ def matriz():
             matrizGrafica.append([0] * numv)
 
         for i in range(0, numv):
-            matrizC.append(Label(frameMatriz, text=valorEtiquetas[i],font=('Arial',12),pady=3))
+            matrizC.append(Label(frameMatriz, text=valorEtiquetas[i],font=('Arial',12),pady=3,bg=bg_fondo,fg="white"))
             matrizC[i].grid(row=0, column=1 + i)
 
-            matrizF.append(Label(frameMatriz, text=valorEtiquetas[i],font=('Arial',12),pady=3))
+            matrizF.append(Label(frameMatriz, text=valorEtiquetas[i],font=('Arial',12),pady=3,bg=bg_fondo,fg="white"))
             matrizF[i].grid(row=1 + i, column=0)
 
         for i in range(numv):
             for j in range(numv):
-                matrizGrafica[i][j] = Entry(frameMatriz, width=5, font=('Verdana',12))
-                matrizGrafica[i][j].grid(row=j + 1, column=i + 1)
+                matrizGrafica[i][j] = Entry(frameMatriz, width=5, font=('Ubuntu',12),bg='#BFBFBF')
+                matrizGrafica[i][j].grid(row=j + 1, column=i + 1,padx=3,pady=3,ipadx=5,ipady=5)
                 matrizGrafica[i][j].insert(0, '0')
 
-        botonMatriz.pack(pady=3,ipady=5)
+        botonMatriz.pack(pady=5,ipady=5)
     else:
         fail['text'] = "Ingrese etiquetas a los vertices"
         fail.pack(pady=1)
@@ -182,29 +183,29 @@ def numVertices():
 
         frameEtiquetas.pack(pady=5)
         for i in range(0, numv):
-            etiqueta.append(Label(frameEtiquetas, text=f"Vertice {i + 1}: ", font=('Arial', 12), pady=3))
+            etiqueta.append(Label(frameEtiquetas, text=f"Vertice {i + 1}: ", font=('Arial', 12), pady=3,bg=bg_fondo,fg="white"))
             etiqueta[i].grid(row=i, column=0)
 
-            gEtiquetas.append(Entry(frameEtiquetas, width=5, font=('Verdana', 12)))
-            gEtiquetas[i].grid(row=i, column=1)
+            gEtiquetas.append(Entry(frameEtiquetas, width=5, font=('Ubuntu',12),bg='#BFBFBF'))
+            gEtiquetas[i].grid(row=i, column=1,ipadx=5,ipady=5,pady=2)
 
         botonEtiquetas.pack(pady=3, ipady=5)
     else:
         fail.pack(pady=1)
 
 
-boton1 = tk.Button(ventana, text="Crear", command=numVertices,font=('Verdana',10,'bold'))
+boton1 = tk.Button(frameContent, text="Crear", command=numVertices,font=('Ubuntu',10,'bold'),cursor="hand2",relief="raised",borderwidth=5,height=1)
 boton1.pack(pady=10)
 
-frameEtiquetas = Frame(ventana, width=200, height=200)
-botonEtiquetas = tk.Button(ventana, text="Establecer vertices", command=matriz,font=('Verdana',10,'bold'))
+frameEtiquetas = Frame(frameContent, width=200, height=200,bg=bg_fondo)
+botonEtiquetas = tk.Button(frameContent, text="Establecer vertices", command=matriz,font=('Ubuntu',10,'bold'),cursor="hand2",relief="raised",borderwidth=5,height=1)
 
 
-botonMatriz = tk.Button(ventana, text="Establecer matriz adyacencia", command=grafo,font=('Verdana',10,'bold'))
+botonMatriz = tk.Button(frameContent, text="Establecer matriz adyacencia", command=grafo,font=('Ubuntu',10,'bold'),cursor="hand2",relief="raised",borderwidth=5,height=1)
 
-frameMatriz = Frame(ventana, width=230, height=230)
-frameImage = Frame(ventana, width=600, height=350)
+frameMatriz = Frame(frameContent, width=230, height=230,bg=bg_fondo)
+frameImage = Frame(ventana, width=600, height=350,bg=bg_fondo)
 
-salir = tk.Button(ventana, text="Salir", command=quit,font=('Verdana',10,'bold'))
+salir = tk.Button(ventana, text="Salir", command=quit,font=('Ubuntu',10,'bold'),cursor="hand2",relief="raised",borderwidth=5,height=1)
 
 ventana.mainloop()
