@@ -182,7 +182,7 @@ def grafo():
             #print(matrizAristas)
             print(Grafo)
             #creacion de la imagen del grafo
-            pos = nx.spring_layout(Grafo)
+            pos = nx.shell_layout(Grafo)
             nx.draw_networkx(Grafo, pos, with_labels=True, font_weight='bold', font_color='white')
             labels = nx.get_edge_attributes(Grafo, 'weight')
 
@@ -191,9 +191,9 @@ def grafo():
             nx.draw_networkx_edge_labels(Grafo, pos, edge_labels=labels)
 
             ax = plt.gca()
-            ax.set_facecolor(bg_fondo)
-            ax.margins(0.1)
+            ax.margins(0.5)
             plt.savefig('grafo.png', transparent = True, bbox_inches = 'tight', pad_inches = 1)
+
             # plt.show()
 
             frameMatriz.destroy()
@@ -204,17 +204,16 @@ def grafo():
 
             #frameImage.pack()
             #frameImage.config(padx=120)
-
-            image = Image.open("grafo.png")
-            image = image.resize((640, 480))
-            imagen = ImageTk.PhotoImage(image)
-            imagePack['image'] = imagen
             grafoGenerado = True
             salir.grid(row=0, column=0, padx=5, pady=1)
         else:
             fail['text'] = 'Ingrese aristas validas'
             fail.pack(pady=1)
             return 0
+    image = Image.open('grafo.png')
+    image = image.resize((640, 480))
+    imagen = ImageTk.PhotoImage(image)
+    imagePack['image'] = imagen
 
     botonAlgoritmoD.grid_forget()
     newdijkstra.pack_forget()

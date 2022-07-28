@@ -22,15 +22,16 @@ options = {
     'arrowsize': 10,
 }
 
-pos = nx.spring_layout(d)
-nx.draw_networkx(d, pos, with_labels=True, font_weight='bold',font_color='white')
+pos = nx.circular_layout(d)
+nx.draw_networkx(d, pos, with_labels=True, font_weight='bold', font_color='white')
 labels = nx.get_edge_attributes(d, 'weight')
 
-nx.draw_networkx_edges(d,pos,arrowsize=10,arrowstyle='->',width=1)
-nx.draw_networkx_nodes(d,pos,node_size=300,node_color='black')
+nx.draw_networkx_edges(d, pos, arrowsize=10, arrowstyle='->', width=1 )
+nx.draw_networkx_nodes(d, pos, node_size=300, node_color='black')
 nx.draw_networkx_edge_labels(d, pos, edge_labels=labels)
 
 ax = plt.gca()
-ax.set_facecolor('blue')
+plt.axis('off')
 ax.margins(0.6)
-plt.savefig('grafo.png', transparent = True, bbox_inches = 'tight', pad_inches = 1)
+
+plt.savefig('grafo.png', transparent=True, bbox_inches='tight', pad_inches=1)
