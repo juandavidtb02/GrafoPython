@@ -32,6 +32,6 @@ nx.draw_networkx_edge_labels(d, pos, edge_labels=labels)
 
 ax = plt.gca()
 plt.axis('off')
-ax.margins(0.6)
+ax.margins(0.9)
 
 plt.savefig('grafo.png', transparent=True, bbox_inches='tight', pad_inches=1)
